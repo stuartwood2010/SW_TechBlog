@@ -13,7 +13,7 @@ BlogPost.hasMany(Comment, {
     foreignKey: 'blogId',
     onDelete: 'CASCADE',
 });
-Comment.belongsTo(User, {
+Comment.belongsTo(BlogPost, {
     foreignKey: 'blogId',
 });
 module.exports = {

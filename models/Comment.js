@@ -19,7 +19,7 @@ Comment.init({
         type: DataTypes.UUID,
 		references: {
 			model: 'user',
-			key: 'username',
+			key: 'id',
 		}
     },
     blogId: {
