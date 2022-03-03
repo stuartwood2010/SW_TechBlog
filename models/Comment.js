@@ -12,9 +12,6 @@ Comment.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    dateCreated: {
-        type: DataTypes.DATE,
-    },
     createdBy: {
         type: DataTypes.UUID,
 		references: {
@@ -31,7 +28,6 @@ Comment.init({
     }
 }, {
     sequelize,
-	timestamps: false,
 	freezeTableName: true,
 	modelName: 'comment'
 });

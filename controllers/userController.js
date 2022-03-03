@@ -22,10 +22,15 @@ module.exports = {
 			res.json(e);
 		}
     },
-	renderHomePage: async (req, res) => {
-		res.render('homepage');
+	getAllUsers: async (req, res) => {
+		try {
+			const users = await User.findAll();
+			res.json(users);
+		} catch (error) {
+			res.json(error);
+		}
 	},
-	getDoctorById: async (req, res) => {
+	getUserById: async (req, res) => {
 		try {
 			const userData = await User.findByPk(req.params.userId);
 			const user = userData.get({ plain: true });
@@ -36,8 +41,10 @@ module.exports = {
 			res.json(e);
 		}
 	},
+	renderHomePage: async (req, res) => {
+		res.render('homepage');
+	},
 	login: async (req, res) => {
-
 		console.log(req.body);
 		try {
 			const userData = await User.findOne({
@@ -81,7 +88,7 @@ module.exports = {
 			req.session.save(() => {
 				req.session.loggedIn = true;
 				req.session.user = user;
-				// res.redirect('/patients');
+				res.redirect('/posts');
 			});
 		} catch (e) {
 			res.json(e);
@@ -89,13 +96,13 @@ module.exports = {
 	},
 	loginView: (req, res) => {
 		if (req.session.loggedIn) {
-			// return res.redirect('/patients');
+			return res.redirect('/posts');
 		}
 		res.render('login');
 	},
 	signupView: (req, res) => {
 		if (req.session.loggedIn) {
-			return res.redirect('/patients');
+			return res.redirect('/posts');
 		}
 		res.render('signUp');
 	},

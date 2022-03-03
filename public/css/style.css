@@ -1,9 +1,9 @@
 :root {
     --headerFont: 'Abril Fatface', cursive;
     --bodyFont: 'Archivo Narrow', sans-serif;
-    --primarycolor: rgb(241, 238, 202);
-    --secondarycolor: rgb(228, 151, 52);
-    --boldcolor: rgb(43, 72, 126);
+    --primarycolor: rgb(240, 223, 206);
+    --secondarycolor: rgb(167, 97, 5);
+    --boldcolor: rgb(16, 36, 73);
 }
 
 body {
