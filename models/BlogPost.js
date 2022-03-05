@@ -1,13 +1,8 @@
-const { Model, DataTypes, UUIDV4 } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config');
 
 class BlogPost extends Model {}
 BlogPost.init({
-    id: {
-        type: DataTypes.UUID,
-        defaultValue: UUIDV4,
-        primaryKey: true,
-    },
     title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -18,9 +13,10 @@ BlogPost.init({
     },
     dateCreated: {
         type: DataTypes.DATE,
+        defaultValue: Date.now,
     },
-    createdBy: {
-        type: DataTypes.UUID,
+    user_id: {
+        type: DataTypes.INTEGER,
 		references: {
 			model: 'user',
 			key: 'id',

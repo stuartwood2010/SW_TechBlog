@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, BlogPost, Comment } = require('../models');
 module.exports = {
     createUser: async (req, res) => {
         const {
@@ -42,7 +42,24 @@ module.exports = {
 		}
 	},
 	renderHomePage: async (req, res) => {
-		res.render('homepage');
+			// try {
+				const userPostData = await BlogPost.findAll({
+					include: [{
+						model: User,
+					},{
+						model: Comment,
+					}]
+				});
+				const posts = userPostData.map(userPost => userPost.get({ plain: true }));
+				console.log(posts);
+				res.render('homepage', {
+					userPosts: posts,			
+					user: req.session.user,
+				});
+			// } catch (e) {
+			// 	res.json(e);
+			// }
+
 	},
 	login: async (req, res) => {
 		console.log(req.body);
@@ -59,7 +76,8 @@ module.exports = {
 			if (userFound.password === req.body.password) {
 				req.session.save(() => {
 					req.session.loggedIn = true;
-					req.session.user = userFound;
+					req.session.user = userFound.username;
+					req.session.user_id = userFound.id;
 					res.json({
 						success: true
 					});
@@ -87,7 +105,8 @@ module.exports = {
 			});
 			req.session.save(() => {
 				req.session.loggedIn = true;
-				req.session.user = user;
+				req.session.user = user.username;
+				req.session.user_id = user.id;
 				res.redirect('/posts');
 			});
 		} catch (e) {

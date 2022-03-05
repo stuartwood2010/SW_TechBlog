@@ -2,7 +2,8 @@ $(document).ready(function () {
 	const usernameField = $('#usernameField');
 	const passwordField = $('#passwordField');
 	const signinBtn = $('#signinBtn');
-	const logoutBtn = $('#logout');
+	const viewPostBtn = $('#viewPostBtn');
+
 	signinBtn.on('click', async function (event) {
 		event.preventDefault();
 		await $.post('/api/users/login', {
@@ -11,8 +12,13 @@ $(document).ready(function () {
 		});
 		window.location.href = '/posts';
 	});
-	logoutBtn.on('click', async function () {
-		await $.post('/api/users/logout');
-		window.location.href = '/';
-	});
+
+	viewPostBtn.on('click', async function (event) {
+		event.preventDefault();
+		const postId = $(this).attr('data-id');
+		$.getJSON('/api/patients/' + postId, async function (data) {
+			console.log(data);			
+		})
+	})
+
 });

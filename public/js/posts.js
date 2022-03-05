@@ -1,45 +1,24 @@
 $(document).ready(function () {
-	const patientNameField = $('#patientNameField');
-	const illnessField = $('#illnessField');
-	const doctorNotesField = $('#doctorNotesField');
-	const addPatientBtn = $("#addPatientBtn");
-	const addNotesBtn = $(".addNotes");
-	const saveNotesBtn = $("#saveNotesBtn");
+	const postTitleField = $('#postTitleField');
+	const postContentField = $('#postContentField');
+	const addPostBtn = $("#addPostBtn");
+	const viewPostBtn = $(".viewPost");
 
-	addPatientBtn.on('click', async function (event) {
+	addPostBtn.on('click', async function (event) {
 		event.preventDefault();
-		await $.post('/api/patients', {
-			patientName: patientNameField.val(),
-			illness: illnessField.val(),
-			doctorNotes: doctorNotesField.val(),
+		await $.post('/api/posts', {
+			title: postTitleField.val(),
+			content: postContentField.val(),			
 		});
 		window.location.reload();
 	});
 
-	addNotesBtn.on('click', async function (event) {
+	viewPostBtn.on('click', async function (event) {
 		event.preventDefault();
-		const patientId = $(this).attr('data-id');
-		$.getJSON('/api/patients/' + patientId, async function (data) {
+		const postId = $(this).attr('data-id');
+		$.getJSON('/api/patients/' + postId, async function (data) {
 			console.log(data);
-			$('#pm-patientName').html(data.patientName);
-			$('#pm-patientIllness').html(data.illness);
-			$('#saveNotesBtn').attr('data-id', data.patientId);
+			
 		})
-	});
-
-	saveNotesBtn.on('click', async function (event) {
-		const patientId = $(this).attr('data-id')
-		console.log(patientId);
-		await $.ajax({
-			type: 'PUT',
-			url: '/api/patients/' + patientId,
-			contentType: 'application/json',
-			data: JSON.stringify({
-				patientName: $('#pm-patientName').text(),
-				patientIllness: $('#pm-patientIllness').text(),
-				doctorNotes: $('#newNoteid').val(),
-			}),
-		})
-		window.location.reload();
 	});
 });
