@@ -11,7 +11,7 @@
         <label for="postContentField" class="form-label">Content:</label>
         <textarea class="form-control" id="postContentField" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary d-grid col-2 mx-auto" id="addPostBtn" data-id={{user.id}}>Add Post</button>
+      <button type="submit" class="btn btn-primary d-grid col-2 mx-auto" id="addPostBtn">Add Post</button>
     </form>
   </div>
 </div>
@@ -26,7 +26,7 @@
         <div class="card-body">
           <h5 class="card-title">Created By: {{post.user.username}}</h5>
           <p class="card-text">{{post.content}}</p>
-          <a href="#" class="btn btn-primary" id="viewPostBtn">View Post</a>
+          <a href="#" class="btn btn-primary viewPostBtn" id="viewPostBtn" data-id={{post.id}}>View Post</a>
         </div>
         <div class="card-footer">
           Date Created: {{format_date post.dateCreated}}

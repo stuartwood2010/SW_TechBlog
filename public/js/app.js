@@ -2,7 +2,7 @@ $(document).ready(function () {
 	const usernameField = $('#usernameField');
 	const passwordField = $('#passwordField');
 	const signinBtn = $('#signinBtn');
-	const viewPostBtn = $('#viewPostBtn');
+	const viewPostBtn = $('.viewPostBtn');
 
 	signinBtn.on('click', async function (event) {
 		event.preventDefault();
@@ -13,12 +13,14 @@ $(document).ready(function () {
 		window.location.href = '/posts';
 	});
 
-	viewPostBtn.on('click', async function (event) {
+	viewPostBtn.on('click', function (event) {
 		event.preventDefault();
 		const postId = $(this).attr('data-id');
-		$.getJSON('/api/patients/' + postId, async function (data) {
-			console.log(data);			
-		})
+		console.log(postId);
+		$.get('/api/posts/' + postId, async function (data) {
+					
+		});
+		window.location.href = '/singlePost'
 	})
 
 });

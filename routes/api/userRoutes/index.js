@@ -3,7 +3,6 @@ const {
 	createUser,
 	getAllUsers,
 	getUserById,
-	renderHomePage,
 	login,
 	signupHandler,
 	logout,

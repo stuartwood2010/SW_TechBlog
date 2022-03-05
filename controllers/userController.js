@@ -26,8 +26,8 @@ module.exports = {
 		try {
 			const users = await User.findAll();
 			res.json(users);
-		} catch (error) {
-			res.json(error);
+		} catch (e) {
+			res.json(e);
 		}
 	},
 	getUserById: async (req, res) => {
@@ -42,7 +42,7 @@ module.exports = {
 		}
 	},
 	renderHomePage: async (req, res) => {
-			// try {
+			try {
 				const userPostData = await BlogPost.findAll({
 					include: [{
 						model: User,
@@ -56,10 +56,9 @@ module.exports = {
 					userPosts: posts,			
 					user: req.session.user,
 				});
-			// } catch (e) {
-			// 	res.json(e);
-			// }
-
+			} catch (e) {
+				res.json(e);
+			}
 	},
 	login: async (req, res) => {
 		console.log(req.body);
