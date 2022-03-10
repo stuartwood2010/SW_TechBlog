@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
 const { renderHomePage,  loginView, signupView, logout } = require('../controllers/userController');
-const { getAllPosts, renderSinglePost, } = require('../controllers/blogPostController');
+const { getAllPosts } = require('../controllers/blogPostController');
 const { getAllComments } = require('../controllers/commentController');
 router.get('/', renderHomePage);
-router.get('/singlePost', renderSinglePost);
-router.get('/posts', getAllPosts);
+router.get('/dashboard', getAllPosts);
 router.get('/comments', getAllComments);
 router.get('/login', loginView);
 router.get('/signup', signupView);

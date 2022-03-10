@@ -1,4 +1,4 @@
-const { Comment } = require('../models');
+const { BlogPost, User, Comment } = require('../models');
 module.exports = {
 	getAllComments: async (req, res) => {
 		if (!req.session.loggedIn) {
@@ -7,12 +7,18 @@ module.exports = {
 		try {
 			const postCommentData = await Comment.findAll({
                 where: {
-                    blogId: req.session.blogpost.id
-                }
+                    blog_id: req.session.blog_id
+                },
+				include: [{
+					model: User,
+				},{
+					model: BlogPost,
+				}]
             });
 			res.render('comments', {
 				postComments: postCommentData.map(postComment => postComment.get({ plain: true })),
 				user: req.session.user,
+				post: req.session.blog_id
 			});
 		} catch (e) {
 			res.json(e);

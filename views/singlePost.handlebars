@@ -1,17 +1,40 @@
 <div class="container">
-  <div class="welcomeHeader"></div>
-  <div class="createPostHeader"></div>
-  <div class="card-body">
-    <form>
-      <div class="mb-3">
-        <label for="postTitleField" class="form-label">Title:</label>
-        <input type="text" class="form-control" id="postTitleField">
-      </div>
-      <div class="mb-3">
-        <label for="postContentField" class="form-label">Content:</label>
-        <textarea class="form-control" id="postContentField" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary d-grid col-2 mx-auto" id="addPostBtn">Add Post</button>
-    </form>
+  <div class="card postCard">
+    <div class="card-header">
+      {{post.title}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Created By:
+        {{post.user.username}}
+      </h5>
+      <p class="card-text">
+        {{post.content}}
+      </p>
+    </div>
+    <div class="card-footer">Date Created:
+       {{format_date post.dateCreated}}
+    </div>
   </div>
+  <form>
+    <div class="mb-3">
+      <label for="postCommentField" class="form-label">Comment:</label>
+      <textarea class="form-control" id="postCommentField" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary d-grid col-2 mx-auto" id="addCommentBtn">Add Comment</button>
+  </form>
 </div>
+
+{{!-- <div class="container comment">
+  <div class="row justify-content-evenly">
+    {{#each postComments as |comment| }}
+      <div class="card postCard">
+        <div class="card-header">
+          {{comment.user_id}}
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{comment.text}}</p>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div> --}}

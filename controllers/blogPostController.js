@@ -16,10 +16,9 @@ module.exports = {
 				}]
 			});
 			const posts = userPostData.map(userPost => userPost.get({ plain: true }));
-			console.log(posts);
-			res.render('posts', {
+			res.render('dashboard', {
 				userPosts: posts,			
-				user: req.session.user,
+				user: req.session.user,	
 			});
 		} catch (e) {
 			res.json(e);
@@ -45,7 +44,7 @@ module.exports = {
 		}
 		const { postId } = req.params;
 		try {
-			const post = await BlogPost.findByPk(
+			const postData = await BlogPost.findByPk(
 				postId,
 				{
 					include: [{
@@ -53,31 +52,11 @@ module.exports = {
 					},{
 						model: Comment,
 					}]
-				});
+				}
+			);
+			const post = postData.get({ plain: true })
 			res.render('singlePost', {
-				post
-			});
-		} catch (error) {
-			res.json(error);
-		}	
-	},
-	renderSinglePost: async (req, res) => {
-		if (!req.session.loggedIn) {
-			return res.redirect('/login');
-		}
-		const { postId } = req.params;
-		try {
-			const post = await BlogPost.findByPk(
-				postId,
-				{
-					include: [{
-						model: User,
-					},{
-						model: Comment,
-					}]
-				});
-			res.render('singlePost', {
-				post
+				post,
 			});
 		} catch (error) {
 			res.json(error);

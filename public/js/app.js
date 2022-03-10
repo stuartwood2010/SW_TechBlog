@@ -10,17 +10,13 @@ $(document).ready(function () {
 			username: usernameField.val().trim(),
 			password: passwordField.val().trim(),
 		});
-		window.location.href = '/posts';
+		window.location.href = '/dashboard';
 	});
 
 	viewPostBtn.on('click', function (event) {
 		event.preventDefault();
 		const postId = $(this).attr('data-id');
-		console.log(postId);
-		$.get('/api/posts/' + postId, async function (data) {
-					
-		});
-		window.location.href = '/singlePost'
+		window.location.href = `/api/posts/${postId}`;
 	})
 
 });

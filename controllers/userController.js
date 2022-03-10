@@ -22,25 +22,6 @@ module.exports = {
 			res.json(e);
 		}
     },
-	getAllUsers: async (req, res) => {
-		try {
-			const users = await User.findAll();
-			res.json(users);
-		} catch (e) {
-			res.json(e);
-		}
-	},
-	getUserById: async (req, res) => {
-		try {
-			const userData = await User.findByPk(req.params.userId);
-			const user = userData.get({ plain: true });
-			res.render('singleUser', {
-				user
-			});
-		} catch (e) {
-			res.json(e);
-		}
-	},
 	renderHomePage: async (req, res) => {
 			try {
 				const userPostData = await BlogPost.findAll({
@@ -51,9 +32,8 @@ module.exports = {
 					}]
 				});
 				const posts = userPostData.map(userPost => userPost.get({ plain: true }));
-				console.log(posts);
 				res.render('homepage', {
-					userPosts: posts,			
+					posts: posts,			
 					user: req.session.user,
 				});
 			} catch (e) {
@@ -106,7 +86,7 @@ module.exports = {
 				req.session.loggedIn = true;
 				req.session.user = user.username;
 				req.session.user_id = user.id;
-				res.redirect('/posts');
+				res.redirect('/dashboard');
 			});
 		} catch (e) {
 			res.json(e);
@@ -114,13 +94,13 @@ module.exports = {
 	},
 	loginView: (req, res) => {
 		if (req.session.loggedIn) {
-			return res.redirect('/posts');
+			return res.redirect('/dashboard');
 		}
 		res.render('login');
 	},
 	signupView: (req, res) => {
 		if (req.session.loggedIn) {
-			return res.redirect('/posts');
+			return res.redirect('/dashboard');
 		}
 		res.render('signUp');
 	},
