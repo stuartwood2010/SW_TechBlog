@@ -4,9 +4,6 @@ const {
     createPost,
     getPostbyId
 } = require('../../../controllers/blogPostController');
-// const { getPostComments } = require('../../../controllers/commentController');
-
-// router.get('/:postId', getPostComments);
 
 router.route('/')
     .get(getAllPosts)

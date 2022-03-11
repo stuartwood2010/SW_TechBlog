@@ -21,8 +21,6 @@ module.exports = {
 				userPosts: posts,			
 				user: req.session.user,	
 			});
-			// res.json(posts);
-			
 		} catch (e) {
 			res.json(e);
 		}
