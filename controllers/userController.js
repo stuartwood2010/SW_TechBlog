@@ -103,7 +103,7 @@ module.exports = {
 	},
 	logout: (req, res) => {
 		req.session.destroy(() => {
-			res.redirect('/');
+			res.redirect('/dashboard');
 		});
 	},
 }

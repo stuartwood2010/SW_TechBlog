@@ -1,6 +1,8 @@
 $(document).ready(function () {
 	const usernameField = $('#usernameField');
 	const passwordField = $('#passwordField');
+	const emailField = $('#emailField');
+	const signupBtn = $('#signupBtn');
 	const signinBtn = $('#signinBtn');
 	const viewPostBtn = $('.viewPostBtn');
 	const postTitleField = $('#postTitleField');
@@ -8,6 +10,16 @@ $(document).ready(function () {
 	const addPostBtn = $("#addPostBtn");
 	const postCommentField = $('#postCommentField');
 	const addCommentBtn = $("#addCommentBtn");
+	
+	signupBtn.on('click', async function (event) {
+		event.preventDefault();
+		await $.post('/api/users/signup', {
+			email: emailField.val(),
+			username: usernameField.val(),
+			password: passwordField.val(),
+		});
+		window.location.href = '/dashboard';
+	});
 
 	signinBtn.on('click', async function (event) {
 		event.preventDefault();
@@ -36,7 +48,8 @@ $(document).ready(function () {
 	addCommentBtn.on('click', async function (event) {
 		event.preventDefault();
 		await $.post('/api/comments', {
-			text: postCommentField.val(),			
+			text: postCommentField.val(),
+			blog_id: event.target.getAttribute('data-postId'),			
 		});
 		window.location.reload();
 	});

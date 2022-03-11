@@ -1,12 +1,12 @@
 const { BlogPost, User, Comment } = require('../models');
 module.exports = {
 	createComment: async (req, res) => {
-		const { text } = req.body;
+		const { text, blog_id } = req.body;
 		try {
 			const newComment = await Comment.create({
 				text,
 				user_id: req.session.user_id,
-                blog_id: req.session.post
+                blog_id
 			});
 			res.json({ newComment });
 		} catch (e) {
