@@ -1,38 +1,43 @@
 const { BlogPost, User, Comment } = require('../models');
 module.exports = {
-	getAllComments: async (req, res) => {
-		if (!req.session.loggedIn) {
-			return res.redirect('/login');
-		}
-		try {
-			const postCommentData = await Comment.findAll({
-                where: {
-                    blog_id: req.session.blog_id
-                },
-				include: [{
-					model: User,
-				},{
-					model: BlogPost,
-				}]
-            });
-			res.render('comments', {
-				postComments: postCommentData.map(postComment => postComment.get({ plain: true })),
-				user: req.session.user,
-				post: req.session.blog_id
-			});
-		} catch (e) {
-			res.json(e);
-		}
-	},
+	// getPostComments: async (req, res) => {
+	// 	if (!req.session.loggedIn) {
+	// 		return res.redirect('/login');
+	// 	}
+	// 	// try {
+	// 		const { postId } = req.params;
+	// 		const postCommentData = await Comment.findAll({
+    //             where: {
+    //                 blog_id: postId,
+    //             },
+	// 			include: [
+	// 			{
+	// 				model: User,
+	// 			},
+	// 			{
+	// 				model: BlogPost,
+	// 			}]
+    //         });
+	// 		const comments = postCommentData.map(postComment => postComment.get({ plain: true }));
+	// 		console.log(comments);
+	// 		res.render('singlePost', {
+	// 			postComments: comments,
+	// 			post: req.session.post
+	// 		});
+	// 		// res.json(comments)
+	// 	// } catch (e) {
+	// 	// 	res.json(e);
+	// 	// }
+	// },
 	createComment: async (req, res) => {
 		const { text } = req.body;
 		try {
 			const newComment = await Comment.create({
 				text,
-				createdBy: req.session.user.id,
-                blogId: req.session.blogpost.id
+				user_id: req.session.user_id,
+                blog_id: req.session.post
 			});
-			res.json({ newPost });
+			res.json({ newComment });
 		} catch (e) {
 			res.json(e);
 		}

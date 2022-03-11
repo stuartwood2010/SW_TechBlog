@@ -48,9 +48,7 @@ module.exports = {
 					username: req.body.username
 				}
 			});
-			const userFound = userData.get({
-				plain: true
-			});
+			const userFound = userData.get({ plain: true });
 
 			if (userFound.password === req.body.password) {
 				req.session.save(() => {
@@ -63,7 +61,6 @@ module.exports = {
 				});
 			}
 		} catch (e) {
-			console.log(e);
 			res.json(e);
 		}
 	},

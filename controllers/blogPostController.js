@@ -16,17 +16,19 @@ module.exports = {
 				}]
 			});
 			const posts = userPostData.map(userPost => userPost.get({ plain: true }));
+			
 			res.render('dashboard', {
 				userPosts: posts,			
 				user: req.session.user,	
 			});
+			// res.json(posts);
+			
 		} catch (e) {
 			res.json(e);
 		}
 	},
 	createPost: async (req, res) => {
 		const { title, content } = req.body;
-		console.log(title, content, req.session.username);
 		try {
 			const newPost = await BlogPost.create({
 				title,
@@ -51,12 +53,17 @@ module.exports = {
 						model: User,
 					},{
 						model: Comment,
+						include: [User],
 					}]
 				}
 			);
+			console.log(postData, 60)
 			const post = postData.get({ plain: true })
+			const comments = post.comments
+			console.log(comments, 63)
 			res.render('singlePost', {
 				post,
+				comments
 			});
 		} catch (error) {
 			res.json(error);

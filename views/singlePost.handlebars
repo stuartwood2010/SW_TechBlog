@@ -15,26 +15,32 @@
        {{format_date post.dateCreated}}
     </div>
   </div>
-  <form>
-    <div class="mb-3">
-      <label for="postCommentField" class="form-label">Comment:</label>
-      <textarea class="form-control" id="postCommentField" rows="3"></textarea>
+  <div class="container comment">
+    <h2 class="comments">Comments:</h2>
+    <div class="row justify-content-evenly">
+      {{#each comments as |comment| }}
+          <div class="card postCard">
+            <div class="card-header">
+              {{comment.user.username}}
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                {{comment.text}}
+              </p>
+            </div>
+            <div class="card-footer">Date Created:
+              {{format_date comment.dateCreated}}
+            </div> 
+          </div>     
+      {{/each}}
     </div>
+  </div>
+  <form>
     <button type="submit" class="btn btn-primary d-grid col-2 mx-auto" id="addCommentBtn">Add Comment</button>
+    <div class="mb-3">
+      <label for="postCommentField" class="form-label"></label>
+      <textarea class="form-control" id="postCommentField" rows="3"></textarea>
+    </div>    
   </form>
 </div>
 
-{{!-- <div class="container comment">
-  <div class="row justify-content-evenly">
-    {{#each postComments as |comment| }}
-      <div class="card postCard">
-        <div class="card-header">
-          {{comment.user_id}}
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{comment.text}}</p>
-        </div>
-      </div>
-    {{/each}}
-  </div>
-</div> --}}
