@@ -1,4 +1,8 @@
 <div class="container">
+  <div class="postBtns">
+    <button type="button" class="updateBtn" data-postId="{{post.id}}">Update Post</button>
+    <button type="button" class="deleteBtn" data-postId="{{post.id}}">Delete Post</button>
+  </div>
   <div class="card postCard">
     <div class="card-header">
       {{post.title}}
@@ -7,9 +11,11 @@
       <h5 class="card-title">Created By:
         {{post.user.username}}
       </h5>
-      <p class="card-text">
-        {{post.content}}
-      </p>
+      <div class="card-text">
+        <input type="text" class="form-control postTitle" value="{{post.title}}">
+        <br>
+        <textarea class="form-control postContent" >{{post.content}}</textarea>
+      </div>
     </div>
     <div class="card-footer">Date Created:
        {{format_date post.dateCreated}}

@@ -59,34 +59,11 @@ module.exports = {
 						success: true
 					});
 				});
+			} else {
+				res.status(400).json(e);
 			}
 		} catch (e) {
-			res.json(e);
-		}
-	},
-	signupHandler: async (req, res) => {
-		const {
-			email,
-			username,
-			password
-		} = req.body;
-		try {
-			const createdUser = await User.create({
-				email,
-				username,
-				password,
-			});
-			const user = createdUser.get({
-				plain: true
-			});
-			req.session.save(() => {
-				req.session.loggedIn = true;
-				req.session.user = user.username;
-				req.session.user_id = user.id;
-				res.redirect('/dashboard');
-			});
-		} catch (e) {
-			res.json(e);
+			res.status(400).json(e);
 		}
 	},
 	loginView: (req, res) => {

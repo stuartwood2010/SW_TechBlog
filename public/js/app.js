@@ -9,25 +9,37 @@ $(document).ready(function () {
 	const postContentField = $('#postContentField');
 	const addPostBtn = $("#addPostBtn");
 	const postCommentField = $('#postCommentField');
-	const addCommentBtn = $("#addCommentBtn");
+	const addCommentBtn = $('#addCommentBtn');
+	const updateBtn = $('.updateBtn');
+	const deleteBtn = $('.deleteBtn');
 	
 	signupBtn.on('click', async function (event) {
 		event.preventDefault();
+		try {
 		await $.post('/api/users/signup', {
 			email: emailField.val(),
 			username: usernameField.val(),
 			password: passwordField.val(),
 		});
 		window.location.href = '/dashboard';
+		} catch (e) {
+			alert('You must provide a valid username, email, and password')
+		}
 	});
 
-	signinBtn.on('click', async function (event) {
+	signinBtn.on('submit', async function (event) {
 		event.preventDefault();
-		await $.post('/api/users/login', {
+		try {
+		const response = await $.post('/api/users/login', {
 			username: usernameField.val().trim(),
 			password: passwordField.val().trim(),
 		});
+		console.log(response);
 		window.location.href = '/dashboard';
+		} catch {
+			alert('Invalid username or password')
+			window.location.reload();
+		}
 	});
 	
 	viewPostBtn.on('click', function (event) {
@@ -53,4 +65,36 @@ $(document).ready(function () {
 		});
 		window.location.reload();
 	});
+
+	updateBtn.on('click', async function () {
+		const postId = $(this).attr('data-postId');
+		const title = $('.postTitle').val();
+		const content = $('.postContent').val();
+		await $.ajax({
+			url: '/api/posts/' + postId,
+			method: 'PUT',
+			contentType: 'application/json',
+			data: JSON.stringify({title, content}), // access in body
+			success: function(result) {
+				window.location.reload();
+			},
+			error: function(request,msg,error) {
+				// handle failure
+			}
+		});		
+	})
+	deleteBtn.on('click', async function() {
+		const postId = $(this).attr('data-postId');
+		await $.ajax({
+			url: '/api/posts/' + postId,
+			method: 'DELETE',
+			contentType: 'application/json',
+			success: function(result) {
+				window.location.href = "/dashboard"
+			},
+			error: function(request,msg,error) {
+				// handle failure
+			}
+		});		
+	})
 });

@@ -1,4 +1,4 @@
-const { BlogPost, User, Comment } = require('../models');
+const { Comment } = require('../models');
 module.exports = {
 	createComment: async (req, res) => {
 		const { text, blog_id } = req.body;

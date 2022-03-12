@@ -55,10 +55,8 @@ module.exports = {
 					}]
 				}
 			);
-			console.log(postData, 60)
 			const post = postData.get({ plain: true })
 			const comments = post.comments
-			console.log(comments, 63)
 			res.render('singlePost', {
 				post,
 				comments
@@ -67,4 +65,32 @@ module.exports = {
 			res.json(error);
 		}	
 	},
+	deletePostById: async (req, res) => {
+		const { postId } = req.params;
+		try {
+			console.log(postId);
+			const deletedPost = await BlogPost.destroy({
+				where: {
+					id: postId,
+				}
+			});
+			res.json(deletedPost);
+		} catch (error) {
+			res.json(error);
+		}
+	},
+	updatePost: async (req, res) => {
+		const { postId } = req.params;
+		try {
+			console.log(postId);
+			const updatedPost = await BlogPost.update(req.body, {
+				where: {
+					id: postId,
+				},				
+			})
+			res.json(updatedPost);
+		} catch (error) {
+			res.json(error);
+		}
+	}
 }

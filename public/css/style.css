@@ -8,9 +8,10 @@
 }
 
 body {
-    background-color: var(--primarycolor);
+    background: url('https://media2.giphy.com/media/smzfl3E7a4iHK/giphy.gif?cid=ecf05e47eolr4qhb1wo8jboft7nteh8kot4rdc1y0blw7g0u&rid=giphy.gif&ct=g');
+    /* background-color: var(--primarycolor); */
     font-family: var(--bodyFont);
-    color: var(--boldcolor);
+    color: var(--secondarycolor);
 }
 
 .navbar {
@@ -18,7 +19,7 @@ body {
 }
 
 .nav-link {
-    color: var(--tertiarycolor);
+    color: var(--secondarycolor);
     margin-right: 20px;
     font-size: 24px;
 }
@@ -38,7 +39,7 @@ body {
 #welcomeId {
     font-weight: bolder;
     font-size: 68px;
-    color: var(--boldcolor);
+    color: var(--secondarycolor);
     text-align: center;
     margin-top: 50px;
     font-family: var(--headerFont);
@@ -70,7 +71,7 @@ body {
     color: var(--boldcolor);
     font-family: var(--bodyFont);
     flex-direction: column;
-    border: solid 2px var(--boldcolor);
+    border: solid 1px var(--primarycolor);
     border-radius: 5px;
     margin: 10;
     padding: 0;
@@ -95,10 +96,26 @@ body {
 .comments {
     text-align: center;
 }
-.btn {
+
+.postBtns {
+    display: flex;
+    margin: 10px;
+    justify-content: space-around;
+}
+.deleteBtn, .updateBtn, .btn {
+    background-color: var(--boldcolor);
+    border-color: var(--tertiarycolor); 
+    color: var(--secondarycolor);
+    font-family: var(--headerFont);
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+}
+
+/* .btn {
     background-color: var(--boldcolor);
     border-color: var(--boldcolor);    
-}
+} */
 
 .btn:hover {
     color: var(--secondarycolor);
