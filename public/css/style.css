@@ -19,7 +19,7 @@ body {
 }
 
 .nav-link {
-    color: var(--secondarycolor);
+    color: var(--primarycolor);
     margin-right: 20px;
     font-size: 24px;
 }
@@ -36,6 +36,11 @@ body {
     margin-left: 50px;
 }
 
+.userInput {
+    justify-content: center;
+    width: 50%;
+}
+
 #welcomeId {
     font-weight: bolder;
     font-size: 68px;
@@ -50,6 +55,7 @@ body {
     margin: 30px;
     font-family: var(--bodyFont);
     text-align: center;
+    color: var(--primarycolor);
 }
 
 .welcomeHeader, .createPostHeader {
@@ -105,20 +111,27 @@ body {
 .deleteBtn, .updateBtn, .btn {
     background-color: var(--boldcolor);
     border-color: var(--tertiarycolor); 
-    color: var(--secondarycolor);
+    color: var(--primarycolor);
     font-family: var(--headerFont);
     font-size: 20px;
     width: 200px;
     height: 50px;
 }
 
-/* .btn {
-    background-color: var(--boldcolor);
-    border-color: var(--boldcolor);    
-} */
-
 .btn:hover {
     color: var(--secondarycolor);
     background-color: var(--boldcolor);
-    border-color: var(--boldcolor);
+    border-color: var(--secondarycolor);
+}
+
+@media screen and (max-width: 991px) {
+    #Title {
+        margin: 0 auto;
+    }
+    .nav-link {
+        font-size: 20px;
+        text-align: center;
+        margin: top 5px;
+    }
+   
 }
