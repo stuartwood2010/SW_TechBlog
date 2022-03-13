@@ -13,7 +13,7 @@ $(document).ready(function () {
 	const updateBtn = $('.updateBtn');
 	const deleteBtn = $('.deleteBtn');
 	
-	signupBtn.on('click', async function (event) {
+	signupBtn.on('submit', async function (event) {
 		event.preventDefault();
 		try {
 		await $.post('/api/users/signup', {

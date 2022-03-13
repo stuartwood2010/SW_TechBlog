@@ -9,13 +9,18 @@
 
 body {
     background: url('https://media2.giphy.com/media/smzfl3E7a4iHK/giphy.gif?cid=ecf05e47eolr4qhb1wo8jboft7nteh8kot4rdc1y0blw7g0u&rid=giphy.gif&ct=g');
-    /* background-color: var(--primarycolor); */
     font-family: var(--bodyFont);
     color: var(--secondarycolor);
 }
 
 .navbar {
     background-color: var(--boldcolor);
+    display: flex;
+    flex-direction: row;
+}
+
+.nav {
+    justify-content: flex-end;
 }
 
 .nav-link {
@@ -36,9 +41,22 @@ body {
     margin-left: 50px;
 }
 
-.userInput {
+.inputContainer {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    
+}
+
+.input {
+    color: var(--boldcolor);
     width: 50%;
+    margin-bottom: 10px;
+}
+
+h1 {
+    background-color: var(--boldcolor);
 }
 
 #welcomeId {
@@ -46,16 +64,18 @@ body {
     font-size: 68px;
     color: var(--secondarycolor);
     text-align: center;
-    margin-top: 50px;
+    margin: 10px;
     font-family: var(--headerFont);
+    background-color: var(--boldcolor);
 }
 
 #welcomeMsg {
     font-size: 24px;
-    margin: 30px;
+    margin: 10px;
     font-family: var(--bodyFont);
     text-align: center;
-    color: var(--primarycolor);
+    color: var(--secondarycolor);
+    background-color: var(--boldcolor);
 }
 
 .welcomeHeader, .createPostHeader {
@@ -64,7 +84,7 @@ body {
     font-family: var(--headerFont);
     font-size: 40px;
     text-align: center;
-    margin-top: 20px;
+    margin: 10px;
 }
 
 .createPostHeader {
@@ -99,8 +119,18 @@ body {
     font-size: 20px;
 }
 
+.form-label {
+    background-color: var(--boldcolor);
+    color: var(--secondarycolor);
+}
+
+.addComment {
+    background-color: var(--tertiarycolor);
+}
+
 .comments {
     text-align: center;
+    background-color: var(--boldcolor);
 }
 
 .postBtns {
@@ -108,7 +138,17 @@ body {
     margin: 10px;
     justify-content: space-around;
 }
-.deleteBtn, .updateBtn, .btn {
+
+.postTitle {
+    color: var(--secondarycolor);
+    text-align: center;
+}
+
+.postContent, .commentText {
+    color: var(--boldcolor)
+}
+
+.btn {
     background-color: var(--boldcolor);
     border-color: var(--tertiarycolor); 
     color: var(--primarycolor);
@@ -128,10 +168,27 @@ body {
     #Title {
         margin: 0 auto;
     }
+    #welcomeId {
+        margin: 5px;
+    }
+    .navbar {
+        flex-direction: column;
+    }
+    .nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 0;
+    }
     .nav-link {
         font-size: 20px;
         text-align: center;
         margin: top 5px;
     }
-   
+    .input {
+        width: 75%;
+    }
+   .welcomeHeader, .createPostHeader, .comments {
+    margin: 10px;
+}
 }

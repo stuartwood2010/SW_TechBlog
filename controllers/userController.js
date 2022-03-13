@@ -1,11 +1,7 @@
 const { User, BlogPost, Comment } = require('../models');
 module.exports = {
     createUser: async (req, res) => {
-        const {
-            username,
-            email,
-            password
-        } = req.body;
+        const {username, email, password } = req.body;
         if (!username || !email || !password) {
 			return res.status(400).json({
 				error: 'You must provide a username, email, and password'
@@ -64,6 +60,25 @@ module.exports = {
 			}
 		} catch (e) {
 			res.status(400).json(e);
+		}
+	},
+	signupHandler: async (req, res) => {
+		const {	email, username, password } = req.body;
+		try {
+			const createdUser = await User.create({
+				email,
+				username,
+				password,
+			});
+			const user = createdUser.get({ plain: true });
+			req.session.save(() => {
+				req.session.loggedIn = true;
+				req.session.user = user.username;
+				req.session.user_id = user.id;
+				res.redirect('/dashboard');
+			});
+		} catch (e) {
+			res.json(e);
 		}
 	},
 	loginView: (req, res) => {
